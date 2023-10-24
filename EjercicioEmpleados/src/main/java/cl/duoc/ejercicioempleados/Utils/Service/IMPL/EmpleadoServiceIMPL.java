@@ -1,0 +1,67 @@
+package cl.duoc.ejercicioempleados.Utils.Service.IMPL;
+
+import cl.duoc.ejercicioempleados.DTO.EmpleadoDTO;
+import cl.duoc.ejercicioempleados.Utils.Service.IEmpleadoService;
+import java.util.ArrayList;
+import java.util.List;
+
+public class EmpleadoServiceIMPL implements IEmpleadoService{
+    
+    private List<EmpleadoDTO> baseDato;
+
+    public EmpleadoServiceIMPL() {
+        baseDato = new ArrayList<>();
+    }
+
+    public EmpleadoServiceIMPL(ArrayList<EmpleadoDTO> baseDato) {
+        this.baseDato = baseDato;
+    }
+    
+    @Override
+    public void crearEmpleado(EmpleadoDTO obj) {
+        baseDato.add(obj);
+    }
+
+    @Override
+    public void eliminarEmpleado(int indice) {
+        baseDato.remove(indice);
+    }
+
+    @Override
+    public void mostrar(int indice) {
+        System.out.println(baseDato.get(indice));
+    }
+
+    @Override
+    public List<EmpleadoDTO> listaEmpleado() {
+        int i = 1;
+        for(EmpleadoDTO elemento:baseDato){
+            System.out.println(i + ") " + elemento.toString());
+            i++;
+            System.out.println("\n\n");
+        }
+        return baseDato;
+    }
+
+    @Override
+    public void editarEmpleado(EmpleadoDTO obj, int indice) {
+        baseDato.set(indice, obj);
+    }
+
+    @Override
+    public void aumentoSalario(double porc, int indice) {
+        EmpleadoDTO obj = baseDato.get(indice);
+        int salarioEmpleado;
+        salarioEmpleado = (int) Math.round(obj.getSalario() * porc);
+        obj.setSalario(salarioEmpleado);
+        baseDato.set(indice, obj);
+    }
+
+    @Override
+    public void superviorEmpleado(EmpleadoDTO supervisor, int indice) {
+        EmpleadoDTO obj = baseDato.get(indice);
+        obj.setSupervisor(supervisor);
+        baseDato.set(indice, obj);
+    }
+
+}
