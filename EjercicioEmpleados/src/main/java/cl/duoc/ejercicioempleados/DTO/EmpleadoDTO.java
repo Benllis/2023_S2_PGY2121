@@ -113,6 +113,7 @@ public class EmpleadoDTO {
         this.supervisor = supervisor;
     }
     
+    @Override
     public String toString(){
         return "Cargo: " + this.cargo +
                 "\nNombre: " + this.nombre + " " + this.apellidos + 

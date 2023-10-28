@@ -1,6 +1,9 @@
 package cl.duoc.ejercicioempleados.Utils.Service.IMPL;
 
 import cl.duoc.ejercicioempleados.DTO.EmpleadoDTO;
+import cl.duoc.ejercicioempleados.DTO.JefeDeZonaDTO;
+import cl.duoc.ejercicioempleados.DTO.SecretarioDTO;
+import cl.duoc.ejercicioempleados.DTO.VendedorDTO;
 import cl.duoc.ejercicioempleados.Utils.Service.IEmpleadoService;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +16,35 @@ public class EmpleadoServiceIMPL implements IEmpleadoService{
         baseDato = new ArrayList<>();
     }
 
+    public List<EmpleadoDTO> getBaseDato() {
+        return baseDato;
+    }
+
+    public void setBaseDato(List<EmpleadoDTO> baseDato) {
+        this.baseDato = baseDato;
+    }
+
     public EmpleadoServiceIMPL(ArrayList<EmpleadoDTO> baseDato) {
         this.baseDato = baseDato;
     }
+
+    @Override
+    public void agregarVendedor(VendedorDTO obj) {
+        EmpleadoDTO union = obj;
+        baseDato.add(union);
+    }
+
+    @Override
+    public void agregarSecretario(SecretarioDTO obj) {        
+        EmpleadoDTO union = obj;
+        baseDato.add(union);
+    }
+
+    @Override
+    public void agregarJefe(JefeDeZonaDTO obj) {    
+        EmpleadoDTO union = obj;
+        baseDato.add(union);
+}
     
     @Override
     public void crearEmpleado(EmpleadoDTO obj) {
@@ -42,6 +71,7 @@ public class EmpleadoServiceIMPL implements IEmpleadoService{
         }
         return baseDato;
     }
+    
 
     @Override
     public void editarEmpleado(EmpleadoDTO obj, int indice) {
@@ -49,7 +79,7 @@ public class EmpleadoServiceIMPL implements IEmpleadoService{
     }
 
     @Override
-    public void aumentoSalario(double porc, int indice) {
+    public void aumentoSalario(float porc, int indice) {
         EmpleadoDTO obj = baseDato.get(indice);
         int salarioEmpleado;
         salarioEmpleado = (int) Math.round(obj.getSalario() * porc);
@@ -63,5 +93,4 @@ public class EmpleadoServiceIMPL implements IEmpleadoService{
         obj.setSupervisor(supervisor);
         baseDato.set(indice, obj);
     }
-
 }
